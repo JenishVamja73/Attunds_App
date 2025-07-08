@@ -1,28 +1,27 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * @format
- */
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import React from 'react';
+import AttendanceSheet from './Screen/AttendanceSheet';
+import LoginScreen from './Screen/LoginScreen';
+import OtpVerificationScreen from './Screen/OtpVerificationScreen';
+import TeacherDashboardWithAttendance from './Screen/TeacherDashboardHeader';
 
-import { NewAppScreen } from '@react-native/new-app-screen';
-import { StatusBar, StyleSheet, useColorScheme, View } from 'react-native';
 
-function App() {
-  const isDarkMode = useColorScheme() === 'dark';
+const Stack = createNativeStackNavigator();
 
+export default function App() {
   return (
-    <View style={styles.container}>
-      <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} />
-      <NewAppScreen templateFileName="App.tsx" />
-    </View>
+    <>
+      <NavigationContainer>
+        <Stack.Navigator >
+          <Stack.Screen name="Login" component={LoginScreen}  options={{headerShown:false}}/>
+          <Stack.Screen name ="otp" component={OtpVerificationScreen} />
+
+          <Stack.Screen name="Teacher" component={TeacherDashboardWithAttendance} />
+          <Stack.Screen name = "AttendanceSheet" component={AttendanceSheet}/>
+        </Stack.Navigator>
+      </NavigationContainer>
+    </>
+
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
-});
-
-export default App;
